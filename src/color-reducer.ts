@@ -1,4 +1,4 @@
-import { rgb, hsl } from 'color-convert';
+import { rgb, hsl, hsv, cmyk } from 'color-convert';
 
 type UpdateHexColorAction = {
   type: 'update-hex-color';
@@ -15,10 +15,22 @@ type UpdateHSLColorAction = {
   payload: { hsl: [number, number, number] };
 };
 
+type UpdateHSVColorAction = {
+  type: 'update-hsv-color';
+  payload: { hsv: [number, number, number] };
+};
+
+type UpdateCMYKColorAction = {
+  type: 'update-cmyk-color';
+  payload: { cmyk: [number, number, number, number] };
+};
+
 export type AdjustColorAction =
   | UpdateHexColorAction
   | UpdateRGBColorAction
-  | UpdateHSLColorAction;
+  | UpdateHSLColorAction
+  | UpdateHSVColorAction
+  | UpdateCMYKColorAction;
 
 type ColorState = {
   hexColor: string;
@@ -44,6 +56,16 @@ export const colorReducer = (
 
   if (action.type === 'update-hsl-color') {
     const hexColor = '#' + hsl.hex(action.payload.hsl);
+    return { ...state, hexColor };
+  }
+
+  if (action.type === 'update-hsv-color') {
+    const hexColor = '#' + hsv.hex(action.payload.hsv);
+    return { ...state, hexColor };
+  }
+
+  if (action.type === 'update-cmyk-color') {
+    const hexColor = '#' + cmyk.hex(action.payload.cmyk);
     return { ...state, hexColor };
   }
 

@@ -17,9 +17,9 @@ const AdjustColors = ({ dispatch, hexColor }: AdjustColorsProps) => {
       <h3>Adjust Colors</h3>
       <HexToRGB dispatch={dispatch} hexColor={hexColor} />
       <HexToHSL dispatch={dispatch} hexColor={hexColor} />
-      {/* <HexToHSV dispatch={dispatch} hexColor={hexColor} />
+      <HexToHSV dispatch={dispatch} hexColor={hexColor} />
       <HexToCMYK dispatch={dispatch} hexColor={hexColor} />
-      <ColorName dispatch={dispatch} hexColor={hexColor} /> */}
+      <ColorName hexColor={hexColor} />
     </div>
   );
 };
