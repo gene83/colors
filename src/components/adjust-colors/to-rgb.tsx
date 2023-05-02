@@ -25,25 +25,19 @@ const HexToRGB = ({ dispatch, hexColor }: HexToRGBProps) => {
         label="R"
         type="number"
         value={r}
-        onChange={(e) =>
-          adjustColor({ red: e.target.valueAsNumber, green: g, blue: b })
-        }
+        onChange={(e) => adjustColor({ red: e.target.valueAsNumber })}
       />
       <LabeledInput
         label="G"
         type="number"
         value={g}
-        onChange={(e) =>
-          adjustColor({ red: r, green: e.target.valueAsNumber, blue: b })
-        }
+        onChange={(e) => adjustColor({ green: e.target.valueAsNumber })}
       />
       <LabeledInput
         label="B"
         type="number"
         value={b}
-        onChange={(e) =>
-          adjustColor({ red: r, green: g, blue: e.target.valueAsNumber })
-        }
+        onChange={(e) => adjustColor({ blue: e.target.valueAsNumber })}
       />
     </section>
   );
