@@ -1,12 +1,12 @@
-import { Dispatch, useState } from 'react';
+import { Dispatch, useContext, useState } from 'react';
 import id from 'lodash.uniqueid';
 import AddSavedColor from './add-saved-color';
 import SavedColor from './saved-color';
 import { AdjustColorAction } from '../../color-reducer';
 import { hex } from 'color-convert';
+import { ColorContext } from '../../context';
 
 type SavedColorsProps = {
-  dispatch: Dispatch<AdjustColorAction>;
   hexColor: string;
 };
 
@@ -15,15 +15,8 @@ const saved = [
   { id: id(), name: 'Blue Fire', hexColor: '#00aadd' },
 ];
 
-const SavedColors = ({ dispatch, hexColor }: SavedColorsProps) => {
+const SavedColors = ({ hexColor }: SavedColorsProps) => {
   const [savedColors, setSavedColors] = useState(saved);
-
-  const adjustColor = (hex: string) => {
-    dispatch({
-      type: 'update-hex-color',
-      payload: { hexColor: hex },
-    });
-  };
 
   return (
     <section className="flex w-full flex-col gap-4 sm:col-span-2">
@@ -39,7 +32,6 @@ const SavedColors = ({ dispatch, hexColor }: SavedColorsProps) => {
             key={id}
             name={name}
             hexColor={hexColor}
-            onClick={() => adjustColor(hexColor)}
             onRemove={() =>
               setSavedColors((colors) =>
                 colors.filter((color) => color.id !== id),

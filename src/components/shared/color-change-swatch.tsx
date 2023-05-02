@@ -1,18 +1,23 @@
 import clsx from 'clsx';
-import { MouseEventHandler } from 'react';
+import { MouseEventHandler, useContext } from 'react';
+import { ColorContext } from '../../context';
 import Button from './button';
 
 type ColorChangeSwatchProps = {
   hexColor: string;
   className?: string;
-  onClick?: MouseEventHandler<HTMLButtonElement>;
 };
 
-const ColorChangeSwatch = ({
-  hexColor,
-  className,
-  onClick,
-}: ColorChangeSwatchProps) => {
+const ColorChangeSwatch = ({ hexColor, className }: ColorChangeSwatchProps) => {
+  const { dispatch } = useContext(ColorContext);
+
+  const adjustColor = (hex: string) => {
+    dispatch({
+      type: 'update-hex-color',
+      payload: { hexColor: hex },
+    });
+  };
+
   return (
     <Button
       className={clsx(
@@ -20,7 +25,7 @@ const ColorChangeSwatch = ({
         className,
       )}
       style={{ backgroundColor: hexColor }}
-      onClick={onClick}
+      onClick={() => adjustColor(hexColor)}
     >
       {hexColor}
     </Button>

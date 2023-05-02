@@ -1,14 +1,16 @@
 import { hex } from 'color-convert';
-import { Dispatch } from 'react';
+import { Dispatch, useContext } from 'react';
 import { AdjustColorAction } from '../../color-reducer';
+import { ColorContext } from '../../context';
 import LabeledInput from '../shared/labeled-input';
 
 type HexToCMYKProps = {
-  dispatch: Dispatch<AdjustColorAction>;
   hexColor: string;
 };
 
-const HexToCMYK = ({ dispatch, hexColor }: HexToCMYKProps) => {
+const HexToCMYK = ({ hexColor }: HexToCMYKProps) => {
+  const { dispatch } = useContext(ColorContext);
+
   const color = hex.cmyk(hexColor);
   const [c, m, y, k] = color;
 
