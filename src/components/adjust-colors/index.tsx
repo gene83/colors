@@ -1,3 +1,5 @@
+import { Dispatch } from 'react';
+import { AdjustColorAction } from '../../color-reducer';
 import ColorName from './color-name';
 import HexToCMYK from './to-cmyk';
 import HexToHSL from './to-hsl';
@@ -5,14 +7,15 @@ import HexToHSV from './to-hsv';
 import HexToRGB from './to-rgb';
 
 type AdjustColorsProps = {
+  dispatch: Dispatch<AdjustColorAction>;  
   hexColor: string;
 };
 
-const AdjustColors = ({ hexColor }: AdjustColorsProps) => {
+const AdjustColors = ({ dispatch, hexColor }: AdjustColorsProps) => {
   return (
     <div className="flex flex-col w-full gap-4">
       <h3>Adjust Colors</h3>
-      <HexToRGB hexColor={hexColor} />
+      <HexToRGB dispatch={dispatch} hexColor={hexColor} />
       <HexToHSL hexColor={hexColor} />
       <HexToHSV hexColor={hexColor} />
       <HexToCMYK hexColor={hexColor} />
